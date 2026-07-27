@@ -1,4 +1,9 @@
-import type { LocalePack, LocalePatch, PackageManifest, Scene } from '@wuguishifu/core';
+import type {
+  LocalePack,
+  LocalePatch,
+  PackageManifest,
+  Scene,
+} from '@graphics-i18n/core';
 
 /**
  * In-memory editor document. `manifest` is canonical for package metadata,
@@ -38,7 +43,12 @@ export function blankDoc(): EditorDoc {
           bind: 'title',
           fallbackText: 'New graphic',
           box: { x: 80, y: 80, width: 600, height: 120 },
-          style: { fontFamily: 'Inter', fontSize: 64, fontWeight: 700, color: '#111111' },
+          style: {
+            fontFamily: 'Inter',
+            fontSize: 64,
+            fontWeight: 700,
+            color: '#111111',
+          },
           fit: { mode: 'shrink', minFontSize: 24 },
         },
       ],

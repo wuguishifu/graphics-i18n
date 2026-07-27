@@ -11,10 +11,7 @@
     ],
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
-    "lib": [
-      "es2022",
-      "dom"
-    ]
+    "lib": ["es2022", "dom"]
   },
   "include": [
     "vite.config.ts",

@@ -1,4 +1,4 @@
-import type { GraphicSource } from '@wuguishifu/core';
+import type { GraphicSource } from '@graphics-i18n/core';
 import { memo, type CSSProperties } from 'react';
 import { SvgGraphic } from './SvgGraphic.js';
 import { useLocalizedGraphic } from './useLocalizedGraphic.js';
@@ -37,10 +37,26 @@ function resolveSize(
  * <LocalizedGraphic source="/graphics/banner.lpkg" locale="fr" width={640} />
  * ```
  */
-export const LocalizedGraphic = memo(function LocalizedGraphic(props: LocalizedGraphicProps) {
-  const { source, locale, width, height, className, style, fallbackLocale, onLoad, onError, debug } =
-    props;
-  const state = useLocalizedGraphic(source, locale, { fallbackLocale, onLoad, onError });
+export const LocalizedGraphic = memo(function LocalizedGraphic(
+  props: LocalizedGraphicProps,
+) {
+  const {
+    source,
+    locale,
+    width,
+    height,
+    className,
+    style,
+    fallbackLocale,
+    onLoad,
+    onError,
+    debug,
+  } = props;
+  const state = useLocalizedGraphic(source, locale, {
+    fallbackLocale,
+    onLoad,
+    onError,
+  });
 
   if (state.status !== 'ready') {
     return <div className={className} style={{ width, height, ...style }} />;
@@ -50,14 +66,23 @@ export const LocalizedGraphic = memo(function LocalizedGraphic(props: LocalizedG
   return (
     <div
       className={className}
-      style={{ position: 'relative', width: size?.width, height: size?.height, ...style }}
+      style={{
+        position: 'relative',
+        width: size?.width,
+        height: size?.height,
+        ...style,
+      }}
     >
       <SvgGraphic
         scene={state.graphic.effectiveScene}
         resources={state.graphic.resources}
         width={size?.width}
         height={size?.height}
-        style={size === undefined ? { width: '100%', height: 'auto', display: 'block' } : undefined}
+        style={
+          size === undefined
+            ? { width: '100%', height: 'auto', display: 'block' }
+            : undefined
+        }
         debug={debug}
       />
       {debug && (
@@ -80,7 +105,9 @@ export const LocalizedGraphic = memo(function LocalizedGraphic(props: LocalizedG
               ? ` (fallback from "${state.graphic.effectiveScene.meta.requestedLocale}")`
               : ''}
             {' | patch: '}
-            {state.graphic.effectiveScene.meta.patchApplied ? 'applied' : 'none'}
+            {state.graphic.effectiveScene.meta.patchApplied
+              ? 'applied'
+              : 'none'}
           </div>
           {state.graphic.diagnostics.map((diagnostic, index) => (
             <div key={index} style={{ color: '#ffcc66' }}>

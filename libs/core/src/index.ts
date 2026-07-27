@@ -1,7 +1,7 @@
 /**
  * Platform-agnostic LPKG pipeline: container reading, locale negotiation,
  * patching, text fitting and effective-scene building. Renderers
- * (`@wuguishifu/react-graphics-i18n`, `@wuguishifu/react-native-graphics-i18n`)
+ * (`@graphics-i18n/react`, `@graphics-i18n/react-native`)
  * build on this package; it has no React or DOM dependency and runs in Node.
  */
 
@@ -69,7 +69,11 @@ export {
   bytesToBase64,
   type LpkgContainer,
 } from './package/container.js';
-export { openPackage, packageIdentity, type OpenedPackage } from './package/openPackage.js';
+export {
+  openPackage,
+  packageIdentity,
+  type OpenedPackage,
+} from './package/openPackage.js';
 export { validateManifest } from './package/validateManifest.js';
 export {
   packLpkgFromFiles,
@@ -105,7 +109,11 @@ export {
 export { clearAllCaches } from './cache/caches.js';
 export { LruCache } from './cache/lru.js';
 export { lineHeightPx } from './layout/textMeasurer.js';
-export { resolveDirection, resolveAlign, isRtlLocale } from './layout/resolveDirection.js';
+export {
+  resolveDirection,
+  resolveAlign,
+  isRtlLocale,
+} from './layout/resolveDirection.js';
 export {
   IDENTITY,
   multiply,

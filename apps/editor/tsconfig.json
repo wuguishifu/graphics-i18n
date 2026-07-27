@@ -50,9 +50,6 @@
   ],
   "references": [
     {
-      "path": "../../libs/react-graphics-i18n"
-    },
-    {
       "path": "../../libs/core"
     }
   ]

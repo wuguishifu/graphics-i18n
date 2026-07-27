@@ -1,11 +1,11 @@
-# @wuguishifu/react-graphics-i18n
+# @graphics-i18n/react
 
-Web renderer for LPKG localized graphics (`@wuguishifu/core`), producing a
+Web renderer for LPKG localized graphics (`@graphics-i18n/core`), producing a
 self-contained inline SVG — assets and fonts are inlined as data URIs, so the
 same markup works in the browser and in server-rendered output.
 
 ```tsx
-import { LocalizedGraphic } from '@wuguishifu/react-graphics-i18n';
+import { LocalizedGraphic } from '@graphics-i18n/react';
 
 <LocalizedGraphic source="/graphics/banner.lpkg" locale="fr" width={640} />;
 ```
@@ -19,14 +19,22 @@ DOM the deterministic approximate measurer is used.
 The pieces are exported separately so a server can render without the hook:
 
 ```tsx
-import { loadLocalizedGraphic } from '@wuguishifu/core';
-import { SvgGraphic, buildSvgResources } from '@wuguishifu/react-graphics-i18n';
+import { loadLocalizedGraphic } from '@graphics-i18n/core';
+import { SvgGraphic, buildSvgResources } from '@graphics-i18n/react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
 const result = await loadLocalizedGraphic(source, locale);
-const resources = buildSvgResources(result.container, result.manifest, result.effectiveScene);
+const resources = buildSvgResources(
+  result.container,
+  result.manifest,
+  result.effectiveScene,
+);
 const svg = renderToStaticMarkup(
-  <SvgGraphic scene={result.effectiveScene} resources={resources} width={640} />,
+  <SvgGraphic
+    scene={result.effectiveScene}
+    resources={resources}
+    width={640}
+  />,
 );
 ```
 

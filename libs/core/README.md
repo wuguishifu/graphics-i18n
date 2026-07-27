@@ -1,4 +1,4 @@
-# @wuguishifu/core
+# @graphics-i18n/core
 
 Platform-agnostic pipeline for **LPKG** localized graphics packages: container
 reading (zip via fflate, plus `*.lpkg.json` debug bundles), manifest
@@ -9,15 +9,21 @@ native dependency — runs in Node, browsers, workers and SSR.
 See `spec.md` at the repo root for the full format and runtime spec.
 Renderers build on this package:
 
-- `@wuguishifu/react-graphics-i18n` — web (SVG)
-- `@wuguishifu/react-native-graphics-i18n` — React Native (Skia)
+- `@graphics-i18n/react` — web (SVG)
+- `@graphics-i18n/react-native` — React Native (Skia)
 
 ## Core API
 
 ```ts
-import { loadLocalizedGraphic, validateLocalizedGraphicPackage } from '@wuguishifu/core';
+import {
+  loadLocalizedGraphic,
+  validateLocalizedGraphicPackage,
+} from '@graphics-i18n/core';
 
-const { manifest, effectiveScene, container } = await loadLocalizedGraphic(source, 'fr');
+const { manifest, effectiveScene, container } = await loadLocalizedGraphic(
+  source,
+  'fr',
+);
 ```
 
 `effectiveScene` is the backend-agnostic draw list (`EffectiveNode[]` with
@@ -30,7 +36,11 @@ measurer via `LoadOptions.createMeasurer`.
 ## Authoring tools (Node only)
 
 ```ts
-import { packLpkgFromFiles, packLpkgDir, validateLpkg } from '@wuguishifu/core/tools';
+import {
+  packLpkgFromFiles,
+  packLpkgDir,
+  validateLpkg,
+} from '@graphics-i18n/core/tools';
 ```
 
 CLI (after build):
@@ -40,7 +50,7 @@ lpkg pack ./my-banner -o banner.lpkg   # zips a spec §3.2 directory, adds chunk
 lpkg validate banner.lpkg
 ```
 
-`@wuguishifu/core/testing` exports the shared example-package fixtures used by
+`@graphics-i18n/core/testing` exports the shared example-package fixtures used by
 the lib test suites.
 
 ## Behavior notes

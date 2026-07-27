@@ -8,7 +8,7 @@ import {
   type LocalePatch,
   type LpkgFileContent,
   type PackageManifest,
-} from '@wuguishifu/core';
+} from '@graphics-i18n/core';
 import type { EditorDoc } from './types';
 
 /** Manifest with chunks + locales[] recomputed from the doc's actual state. */
@@ -19,7 +19,9 @@ export function deriveManifest(doc: EditorDoc): PackageManifest {
       .filter(([, patch]) => Object.keys(patch.nodes).length > 0)
       .map(([locale]) => [locale, `patches/${locale}.json`]),
   );
-  const previous = new Map(doc.manifest.locales.map((entry) => [entry.locale, entry]));
+  const previous = new Map(
+    doc.manifest.locales.map((entry) => [entry.locale, entry]),
+  );
   const locales: LocaleEntry[] = localeCodes.map((locale) => ({
     ...previous.get(locale),
     locale,
@@ -31,13 +33,23 @@ export function deriveManifest(doc: EditorDoc): PackageManifest {
     ...doc.manifest,
     chunks: {
       scene: 'scene.json',
-      locales: Object.fromEntries(localeCodes.map((locale) => [locale, `locales/${locale}.json`])),
+      locales: Object.fromEntries(
+        localeCodes.map((locale) => [locale, `locales/${locale}.json`]),
+      ),
       patches: Object.keys(patches).length > 0 ? patches : undefined,
       assets: Object.fromEntries(
-        Object.entries(doc.manifest.assets).map(([id, entry]) => [id, entry.path]),
+        Object.entries(doc.manifest.assets).map(([id, entry]) => [
+          id,
+          entry.path,
+        ]),
       ),
       fonts: doc.manifest.fonts
-        ? Object.fromEntries(Object.entries(doc.manifest.fonts).map(([id, entry]) => [id, entry.path]))
+        ? Object.fromEntries(
+            Object.entries(doc.manifest.fonts).map(([id, entry]) => [
+              id,
+              entry.path,
+            ]),
+          )
         : undefined,
     },
     locales,

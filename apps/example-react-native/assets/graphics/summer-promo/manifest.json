@@ -3,7 +3,7 @@
   "packageId": "summer-promo-banner",
   "packageVersion": 1,
   "name": "Summer Promo Banner",
-  "description": "Example localized graphic for @wuguishifu/react-native-graphics-i18n",
+  "description": "Example localized graphic for @graphics-i18n/react-native",
   "canvas": {
     "width": 1200,
     "height": 630,

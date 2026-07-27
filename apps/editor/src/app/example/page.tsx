@@ -1,6 +1,6 @@
 'use client';
 
-import { LocalizedGraphic } from '@wuguishifu/react-graphics-i18n';
+import { LocalizedGraphic } from '@graphics-i18n/react';
 import { useState } from 'react';
 
 const LOCALES = [
@@ -25,11 +25,13 @@ export default function ExamplePage() {
   return (
     <main className="mx-auto flex max-w-3xl flex-col gap-6 p-6">
       <header className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold tracking-tight">LocalizedGraphic (web)</h1>
+        <h1 className="text-3xl font-bold tracking-tight">
+          LocalizedGraphic (web)
+        </h1>
         <p className="text-muted-foreground">
-          One .lpkg file, one shared scene — the locale below picks the strings, layout patch and
-          asset overrides at render time. Rendered as a self-contained inline SVG by
-          @wuguishifu/react-graphics-i18n.
+          One .lpkg file, one shared scene — the locale below picks the strings,
+          layout patch and asset overrides at render time. Rendered as a
+          self-contained inline SVG by @graphics-i18n/react.
         </p>
       </header>
 
@@ -42,7 +44,9 @@ export default function ExamplePage() {
         className="w-full overflow-hidden rounded-2xl border"
         style={{ aspectRatio: '1200 / 630' }}
       />
-      {error !== undefined && <p className="text-sm text-destructive">{error}</p>}
+      {error !== undefined && (
+        <p className="text-sm text-destructive">{error}</p>
+      )}
 
       <div className="flex flex-wrap items-center gap-2">
         {LOCALES.map(({ code, label }) => (

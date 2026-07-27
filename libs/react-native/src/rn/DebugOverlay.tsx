@@ -11,10 +11,14 @@ export function DebugOverlay({ graphic }: { graphic: LoadedGraphic }) {
     <View pointerEvents="none" style={styles.overlay}>
       <Text style={styles.line}>
         locale: {meta.locale}
-        {meta.usedFallbackLocale ? ` (fallback from "${meta.requestedLocale}")` : ''}
+        {meta.usedFallbackLocale
+          ? ` (fallback from "${meta.requestedLocale}")`
+          : ''}
       </Text>
       <Text style={styles.line}>fallback: {meta.fallbackLocale}</Text>
-      <Text style={styles.line}>patch: {meta.patchApplied ? 'applied' : 'none'}</Text>
+      <Text style={styles.line}>
+        patch: {meta.patchApplied ? 'applied' : 'none'}
+      </Text>
       {graphic.diagnostics.map((diagnostic, index) => (
         <Text key={index} style={[styles.line, styles.warning]}>
           {diagnostic.code}: {diagnostic.message}

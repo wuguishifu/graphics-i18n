@@ -4,19 +4,19 @@
   "files": [],
   "references": [
     {
-      "path": "./libs/react-native-graphics-i18n"
-    },
-    {
       "path": "./apps/example-react-native"
     },
     {
       "path": "./apps/editor"
     },
     {
-      "path": "./libs/react-graphics-i18n"
+      "path": "./libs/core"
     },
     {
-      "path": "./libs/core"
+      "path": "./libs/react-native"
+    },
+    {
+      "path": "./libs/react"
     }
   ],
   "compilerOptions": {}

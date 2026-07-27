@@ -1,17 +1,17 @@
-# @wuguishifu/react-native-graphics-i18n
+# @graphics-i18n/react-native
 
-React Native renderer for LPKG localized graphics (`@wuguishifu/core`),
+React Native renderer for LPKG localized graphics (`@graphics-i18n/core`),
 drawing via `@shopify/react-native-skia`.
 
 ```tsx
-import { LocalizedGraphic } from '@wuguishifu/react-native-graphics-i18n';
+import { LocalizedGraphic } from '@graphics-i18n/react-native';
 
 <LocalizedGraphic source={require('./banner.lpkg')} locale="fr" width={360} />;
 ```
 
 The core pipeline API (`loadLocalizedGraphic`, types, …) is re-exported from
 this package for convenience; see the core README for format and behavior
-documentation, and `@wuguishifu/react-graphics-i18n` for the web renderer. A
+documentation, and `@graphics-i18n/react` for the web renderer. A
 working demo lives in `apps/example-react-native` (package source in
 `assets/graphics/summer-promo/`, rebuilt with
 `nx run example-react-native:build-graphics`).

@@ -1,16 +1,20 @@
-import { collectVisibleAssetIds, loadLocalizedGraphic, packageIdentity, sourceKey, type EffectiveScene, type GraphicError, type GraphicSource, type PackageManifest } from '@wuguishifu/core';
+import {
+  loadLocalizedGraphic,
+  sourceKey,
+  type EffectiveScene,
+  type GraphicError,
+  type GraphicSource,
+  type PackageManifest,
+} from '@graphics-i18n/core';
 import { useEffect, useRef, useState } from 'react';
-import type { RenderResources } from './drawNode.js';
-import { loadFonts } from './loadFont.js';
-import { loadAssets } from './loadImage.js';
-import { installRnSourceReader } from './resolveRnSource.js';
-import { SkiaTextMeasurer } from './skiaTextMeasurer.js';
+import { createCanvasTextMeasurer } from './canvasTextMeasurer.js';
+import { buildSvgResources, type SvgResources } from './svgResources.js';
 
 export type LoadedGraphic = {
   manifest: PackageManifest;
   effectiveScene: EffectiveScene;
-  resources: RenderResources;
-  /** Scene diagnostics plus font/asset load issues. */
+  resources: SvgResources;
+  /** Scene diagnostics plus asset/font resolution issues. */
   diagnostics: GraphicError[];
 };
 
@@ -26,19 +30,20 @@ export type UseLocalizedGraphicOptions = {
 };
 
 /**
- * Load a package, its fonts and the assets needed by the requested locale
- * (spec §5.3). Re-runs only when the source identity, locale or fallback
- * changes.
+ * Web loader (spec §5.3): opens the package, registers embedded fonts,
+ * measures with the browser canvas and inlines the assets the requested
+ * locale needs. Re-runs only when source identity, locale or fallback change.
  */
 export function useLocalizedGraphic(
   source: GraphicSource,
   locale: string,
   options: UseLocalizedGraphicOptions = {},
 ): UseLocalizedGraphicState {
-  const [state, setState] = useState<UseLocalizedGraphicState>({ status: 'loading' });
+  const [state, setState] = useState<UseLocalizedGraphicState>({
+    status: 'loading',
+  });
   const { fallbackLocale } = options;
 
-  // Keep callbacks out of the effect deps so identity churn doesn't reload.
   const callbacks = useRef(options);
   callbacks.current = options;
 
@@ -47,21 +52,22 @@ export function useLocalizedGraphic(
   sourceRef.current = source;
 
   useEffect(() => {
-    installRnSourceReader();
     let cancelled = false;
     setState({ status: 'loading' });
 
     (async () => {
-      const result = await loadLocalizedGraphic(sourceRef.current, locale, fallbackLocale, {
-        createMeasurer: ({ manifest, container }) =>
-          Promise.resolve(new SkiaTextMeasurer(loadFonts(container, manifest, packageIdentity(manifest)))),
-      });
-      const fonts = loadFonts(result.container, result.manifest, packageIdentity(result.manifest));
-      const assets = loadAssets(
+      const result = await loadLocalizedGraphic(
+        sourceRef.current,
+        locale,
+        fallbackLocale,
+        {
+          createMeasurer: createCanvasTextMeasurer,
+        },
+      );
+      const resources = buildSvgResources(
         result.container,
         result.manifest,
-        result.packageKey,
-        collectVisibleAssetIds(result.effectiveScene),
+        result.effectiveScene,
       );
       if (cancelled) return;
       setState({
@@ -69,15 +75,10 @@ export function useLocalizedGraphic(
         graphic: {
           manifest: result.manifest,
           effectiveScene: result.effectiveScene,
-          resources: {
-            images: assets.images,
-            svgs: assets.svgs,
-            measurer: new SkiaTextMeasurer(fonts),
-          },
+          resources,
           diagnostics: [
             ...result.effectiveScene.meta.diagnostics,
-            ...fonts.diagnostics,
-            ...assets.diagnostics,
+            ...resources.diagnostics,
           ],
         },
       });

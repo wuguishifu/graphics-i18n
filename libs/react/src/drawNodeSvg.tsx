@@ -4,14 +4,19 @@ import {
   type EffectiveNode,
   type Matrix2D,
   type ResolvedTextLayout,
-} from '@wuguishifu/core';
+} from '@graphics-i18n/core';
 import type { CSSProperties, ReactNode } from 'react';
 import type { SvgResources } from './svgResources.js';
 
 function isIdentity(m: Matrix2D): boolean {
   return (
     m === IDENTITY ||
-    (m[0] === 1 && m[1] === 0 && m[2] === 0 && m[3] === 1 && m[4] === 0 && m[5] === 0)
+    (m[0] === 1 &&
+      m[1] === 0 &&
+      m[2] === 0 &&
+      m[3] === 1 &&
+      m[4] === 0 &&
+      m[5] === 0)
   );
 }
 
@@ -33,9 +38,14 @@ const ASCENT_RATIO = 0.8;
 function textLines(layout: ResolvedTextLayout, bounds: Box): ReactNode[] {
   const { style, lines, fontSize, lineHeight, direction } = layout;
   const align = style.align ?? 'left';
-  const anchor = align === 'center' ? 'middle' : align === 'right' ? 'end' : 'start';
+  const anchor =
+    align === 'center' ? 'middle' : align === 'right' ? 'end' : 'start';
   const x =
-    align === 'center' ? bounds.x + bounds.width / 2 : align === 'right' ? bounds.x + bounds.width : bounds.x;
+    align === 'center'
+      ? bounds.x + bounds.width / 2
+      : align === 'right'
+        ? bounds.x + bounds.width
+        : bounds.x;
   const contentHeight = lines.length * lineHeight;
   const valign = style.valign ?? 'top';
   const offsetY =
@@ -45,8 +55,9 @@ function textLines(layout: ResolvedTextLayout, bounds: Box): ReactNode[] {
         ? bounds.height - contentHeight
         : 0;
   const decoration =
-    [style.underline ? 'underline' : '', style.strike ? 'line-through' : ''].join(' ').trim() ||
-    undefined;
+    [style.underline ? 'underline' : '', style.strike ? 'line-through' : '']
+      .join(' ')
+      .trim() || undefined;
   const textStyle: CSSProperties | undefined =
     direction === 'rtl' ? { direction: 'rtl' } : undefined;
 
@@ -71,7 +82,10 @@ function textLines(layout: ResolvedTextLayout, bounds: Box): ReactNode[] {
 }
 
 /** Map one effective node to SVG elements. Returns null for unloaded assets. */
-export function drawNodeSvg(node: EffectiveNode, resources: SvgResources): ReactNode {
+export function drawNodeSvg(
+  node: EffectiveNode,
+  resources: SvgResources,
+): ReactNode {
   if (!node.visible || node.opacity <= 0) {
     return null;
   }
@@ -105,7 +119,9 @@ export function drawNodeSvg(node: EffectiveNode, resources: SvgResources): React
           width={bounds.width}
           height={bounds.height}
           preserveAspectRatio={
-            draw.kind === 'image' ? FIT_TO_PRESERVE[draw.fit] : FIT_TO_PRESERVE['contain']
+            draw.kind === 'image'
+              ? FIT_TO_PRESERVE[draw.fit]
+              : FIT_TO_PRESERVE['contain']
           }
         />
       );
@@ -158,7 +174,9 @@ export function drawNodeSvg(node: EffectiveNode, resources: SvgResources): React
     return (
       <g
         key={node.id}
-        transform={isIdentity(node.matrix) ? undefined : svgTransform(node.matrix)}
+        transform={
+          isIdentity(node.matrix) ? undefined : svgTransform(node.matrix)
+        }
         opacity={node.opacity < 1 ? node.opacity : undefined}
       >
         {content}
@@ -171,7 +189,12 @@ export function drawNodeSvg(node: EffectiveNode, resources: SvgResources): React
 /** Stroked bounds for the debug overlay (spec §9). */
 export function drawDebugBoundsSvg(node: EffectiveNode): ReactNode {
   return (
-    <g key={`debug-${node.id}`} transform={isIdentity(node.matrix) ? undefined : svgTransform(node.matrix)}>
+    <g
+      key={`debug-${node.id}`}
+      transform={
+        isIdentity(node.matrix) ? undefined : svgTransform(node.matrix)
+      }
+    >
       <rect
         x={node.bounds.x}
         y={node.bounds.y}

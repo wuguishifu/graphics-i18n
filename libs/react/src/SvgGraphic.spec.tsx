@@ -3,9 +3,13 @@ import {
   loadLocalizedGraphic,
   memorySourceReader,
   openContainer,
-} from '@wuguishifu/core';
-import { fixtureFiles, fixtureManifest, fixturePackage } from '@wuguishifu/core/testing';
-import { packLpkgFromFiles } from '@wuguishifu/core/tools';
+} from '@graphics-i18n/core';
+import {
+  fixtureFiles,
+  fixtureManifest,
+  fixturePackage,
+} from '@graphics-i18n/core/testing';
+import { packLpkgFromFiles } from '@graphics-i18n/core/tools';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { SvgGraphic } from './SvgGraphic.js';
 import { buildSvgResources } from './svgResources.js';
@@ -14,13 +18,23 @@ const SOURCE = 'pkg://banner.lpkg';
 
 async function renderLocale(locale: string, bytes = fixturePackage()) {
   const reader = memorySourceReader({ [SOURCE]: bytes });
-  const result = await loadLocalizedGraphic(SOURCE, locale, undefined, { reader });
-  const resources = buildSvgResources(result.container, result.manifest, result.effectiveScene);
+  const result = await loadLocalizedGraphic(SOURCE, locale, undefined, {
+    reader,
+  });
+  const resources = buildSvgResources(
+    result.container,
+    result.manifest,
+    result.effectiveScene,
+  );
   return {
     result,
     resources,
     markup: renderToStaticMarkup(
-      <SvgGraphic scene={result.effectiveScene} resources={resources} width={600} />,
+      <SvgGraphic
+        scene={result.effectiveScene}
+        resources={resources}
+        width={600}
+      />,
     ),
   };
 }
@@ -59,8 +73,14 @@ describe('SvgGraphic', () => {
 
   it('draws debug bounds when enabled', async () => {
     const reader = memorySourceReader({ [SOURCE]: fixturePackage() });
-    const result = await loadLocalizedGraphic(SOURCE, 'en', undefined, { reader });
-    const resources = buildSvgResources(result.container, result.manifest, result.effectiveScene);
+    const result = await loadLocalizedGraphic(SOURCE, 'en', undefined, {
+      reader,
+    });
+    const resources = buildSvgResources(
+      result.container,
+      result.manifest,
+      result.effectiveScene,
+    );
     const markup = renderToStaticMarkup(
       <SvgGraphic scene={result.effectiveScene} resources={resources} debug />,
     );
@@ -74,15 +94,25 @@ describe('buildSvgResources', () => {
     const manifest = fixtureManifest();
     manifest.chunks.fonts = { 'inter-regular': 'fonts/Inter-Regular.ttf' };
     manifest.fonts = {
-      'inter-regular': { path: 'fonts/Inter-Regular.ttf', family: 'Inter', weight: 400 },
+      'inter-regular': {
+        path: 'fonts/Inter-Regular.ttf',
+        family: 'Inter',
+        weight: 400,
+      },
     };
     files['manifest.json'] = manifest;
     files['fonts/Inter-Regular.ttf'] = new Uint8Array([0, 1, 0, 0]);
 
     const container = openContainer(packLpkgFromFiles(files));
     const reader = memorySourceReader({ [SOURCE]: packLpkgFromFiles(files) });
-    const result = await loadLocalizedGraphic(SOURCE, 'en', undefined, { reader });
-    const resources = buildSvgResources(container, result.manifest, result.effectiveScene);
+    const result = await loadLocalizedGraphic(SOURCE, 'en', undefined, {
+      reader,
+    });
+    const resources = buildSvgResources(
+      container,
+      result.manifest,
+      result.effectiveScene,
+    );
     expect(resources.fontCss).toContain('@font-face');
     expect(resources.fontCss).toContain('"Inter"');
     expect(resources.fontCss).toContain('font/ttf;base64,');
@@ -91,9 +121,19 @@ describe('buildSvgResources', () => {
   it('reports missing assets as diagnostics', async () => {
     const files = fixtureFiles();
     delete files['assets/bg.webp'];
-    const reader = memorySourceReader({ [SOURCE]: packLpkgFromFiles(files, { computeHashes: false }) });
-    const result = await loadLocalizedGraphic(SOURCE, 'en', undefined, { reader });
-    const resources = buildSvgResources(result.container, result.manifest, result.effectiveScene);
-    expect(resources.diagnostics.some((d) => d.code === 'ASSET_MISSING')).toBe(true);
+    const reader = memorySourceReader({
+      [SOURCE]: packLpkgFromFiles(files, { computeHashes: false }),
+    });
+    const result = await loadLocalizedGraphic(SOURCE, 'en', undefined, {
+      reader,
+    });
+    const resources = buildSvgResources(
+      result.container,
+      result.manifest,
+      result.effectiveScene,
+    );
+    expect(resources.diagnostics.some((d) => d.code === 'ASSET_MISSING')).toBe(
+      true,
+    );
   });
 });

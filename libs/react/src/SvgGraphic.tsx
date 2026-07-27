@@ -1,4 +1,4 @@
-import type { EffectiveScene } from '@wuguishifu/core';
+import type { EffectiveScene } from '@graphics-i18n/core';
 import type { CSSProperties } from 'react';
 import { drawDebugBoundsSvg, drawNodeSvg } from './drawNodeSvg.js';
 import type { SvgResources } from './svgResources.js';
@@ -22,7 +22,15 @@ export type SvgGraphicProps = {
  * fonts), so it works with renderToStaticMarkup for SSR as well as in the
  * browser.
  */
-export function SvgGraphic({ scene, resources, width, height, className, style, debug }: SvgGraphicProps) {
+export function SvgGraphic({
+  scene,
+  resources,
+  width,
+  height,
+  className,
+  style,
+  debug,
+}: SvgGraphicProps) {
   const { canvas } = scene;
   return (
     <svg
@@ -36,7 +44,13 @@ export function SvgGraphic({ scene, resources, width, height, className, style, 
     >
       {resources.fontCss !== '' && <style>{resources.fontCss}</style>}
       {canvas.background !== undefined && (
-        <rect x={0} y={0} width={canvas.width} height={canvas.height} fill={canvas.background} />
+        <rect
+          x={0}
+          y={0}
+          width={canvas.width}
+          height={canvas.height}
+          fill={canvas.background}
+        />
       )}
       {scene.nodes.map((node) => drawNodeSvg(node, resources))}
       {debug && scene.nodes.map((node) => drawDebugBoundsSvg(node))}

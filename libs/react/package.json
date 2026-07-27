@@ -1,5 +1,5 @@
 {
-  "name": "@wuguishifu/react-graphics-i18n",
+  "name": "@graphics-i18n/react",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -9,14 +9,14 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "@wuguishifu/source": "./src/index.ts",
+      "@graphics-i18n/source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     }
   },
   "dependencies": {
-    "@wuguishifu/core": "workspace:*",
+    "@graphics-i18n/core": "workspace:*",
     "tslib": "*"
   },
   "peerDependencies": {

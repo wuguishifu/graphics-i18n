@@ -5,8 +5,12 @@ import {
   resolveLocale,
   type EffectiveScene,
   type TextMeasurer,
-} from '@wuguishifu/core';
-import { buildSvgResources, createCanvasTextMeasurer, type SvgResources } from '@wuguishifu/react-graphics-i18n';
+} from '@graphics-i18n/core';
+import {
+  buildSvgResources,
+  createCanvasTextMeasurer,
+  type SvgResources,
+} from '@graphics-i18n/react';
 import { useEffect, useMemo, useState } from 'react';
 import { deriveManifest, docToFiles } from './serialize';
 import type { EditorDoc } from './types';
@@ -23,7 +27,10 @@ export type Preview = {
  * package's FontFaces are registered; the approximate measurer covers the
  * first render.
  */
-export function usePreview(doc: EditorDoc, locale: string): Preview | { scene?: undefined; resources?: undefined; error: string } {
+export function usePreview(
+  doc: EditorDoc,
+  locale: string,
+): Preview | { scene?: undefined; resources?: undefined; error: string } {
   const [measurer, setMeasurer] = useState<TextMeasurer>(approxTextMeasurer);
 
   // Font set identity: reload FontFaces only when the font table changes.

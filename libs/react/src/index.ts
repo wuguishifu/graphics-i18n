@@ -1,7 +1,10 @@
-export * from '@wuguishifu/core';
+export * from '@graphics-i18n/core';
 
 // Web (SVG) renderer
-export { LocalizedGraphic, type LocalizedGraphicProps } from './LocalizedGraphic.js';
+export {
+  LocalizedGraphic,
+  type LocalizedGraphicProps,
+} from './LocalizedGraphic.js';
 export {
   useLocalizedGraphic,
   type UseLocalizedGraphicState,

@@ -1,7 +1,10 @@
-export * from '@wuguishifu/core';
+export * from '@graphics-i18n/core';
 
 // React Native renderer (requires react, react-native, @shopify/react-native-skia)
-export { LocalizedGraphic, type LocalizedGraphicProps } from './rn/LocalizedGraphic.js';
+export {
+  LocalizedGraphic,
+  type LocalizedGraphicProps,
+} from './rn/LocalizedGraphic.js';
 export {
   useLocalizedGraphic,
   type UseLocalizedGraphicState,

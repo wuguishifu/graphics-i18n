@@ -1,4 +1,4 @@
-import { base64ToBytes, bytesToBase64 } from '@wuguishifu/core';
+import { base64ToBytes, bytesToBase64 } from '@graphics-i18n/core';
 import type { EditorDoc } from './types';
 
 const STORAGE_KEY = 'lpkg-editor-draft-v1';
@@ -10,7 +10,10 @@ export function saveDraft(doc: EditorDoc): void {
     const stored: StoredDoc = {
       ...doc,
       files: Object.fromEntries(
-        Object.entries(doc.files).map(([path, bytes]) => [path, bytesToBase64(bytes)]),
+        Object.entries(doc.files).map(([path, bytes]) => [
+          path,
+          bytesToBase64(bytes),
+        ]),
       ),
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
@@ -27,7 +30,10 @@ export function loadDraft(): EditorDoc | undefined {
     return {
       ...stored,
       files: Object.fromEntries(
-        Object.entries(stored.files).map(([path, base64]) => [path, base64ToBytes(base64)]),
+        Object.entries(stored.files).map(([path, base64]) => [
+          path,
+          base64ToBytes(base64),
+        ]),
       ),
     };
   } catch {

@@ -11,7 +11,13 @@ import {
   type SkImage,
   type SkSVG,
 } from '@shopify/react-native-skia';
-import { IDENTITY, type Box, type EffectiveNode, type Matrix2D, type ResolvedTextLayout } from '@wuguishifu/core';
+import {
+  IDENTITY,
+  type Box,
+  type EffectiveNode,
+  type Matrix2D,
+  type ResolvedTextLayout,
+} from '@graphics-i18n/core';
 import type { ReactNode } from 'react';
 import type { SkiaTextMeasurer } from './skiaTextMeasurer.js';
 
@@ -27,14 +33,26 @@ export function toSkMatrix(m: Matrix2D): number[] {
 }
 
 function isIdentity(m: Matrix2D): boolean {
-  return m === IDENTITY || (m[0] === 1 && m[1] === 0 && m[2] === 0 && m[3] === 1 && m[4] === 0 && m[5] === 0);
+  return (
+    m === IDENTITY ||
+    (m[0] === 1 &&
+      m[1] === 0 &&
+      m[2] === 0 &&
+      m[3] === 1 &&
+      m[4] === 0 &&
+      m[5] === 0)
+  );
 }
 
 // Baseline offset from line top; Skia line metrics vary per face, a fixed
 // ascent ratio keeps layout deterministic across platforms (spec §4.4).
 const ASCENT_RATIO = 0.8;
 
-function textLines(layout: ResolvedTextLayout, bounds: Box, measurer: SkiaTextMeasurer): ReactNode[] {
+function textLines(
+  layout: ResolvedTextLayout,
+  bounds: Box,
+  measurer: SkiaTextMeasurer,
+): ReactNode[] {
   const { style, lines, fontSize, lineHeight } = layout;
   const font = measurer.getFont(style, fontSize);
   const contentHeight = lines.length * lineHeight;
@@ -56,12 +74,24 @@ function textLines(layout: ResolvedTextLayout, bounds: Box, measurer: SkiaTextMe
           ? bounds.x + bounds.width - width
           : bounds.x;
     const y = bounds.y + offsetY + index * lineHeight + fontSize * ASCENT_RATIO;
-    return <Text key={index} x={x} y={y} text={line} font={font} color={style.color} />;
+    return (
+      <Text
+        key={index}
+        x={x}
+        y={y}
+        text={line}
+        font={font}
+        color={style.color}
+      />
+    );
   });
 }
 
 /** Map one effective node to Skia elements. Returns null for unloaded assets. */
-export function drawNode(node: EffectiveNode, resources: RenderResources): ReactNode {
+export function drawNode(
+  node: EffectiveNode,
+  resources: RenderResources,
+): ReactNode {
   if (!node.visible || node.opacity <= 0) {
     return null;
   }
@@ -116,7 +146,13 @@ export function drawNode(node: EffectiveNode, resources: RenderResources): React
       const svg = resources.svgs.get(draw.assetId);
       if (!svg) return null;
       content = (
-        <ImageSVG svg={svg} x={bounds.x} y={bounds.y} width={bounds.width} height={bounds.height} />
+        <ImageSVG
+          svg={svg}
+          x={bounds.x}
+          y={bounds.y}
+          width={bounds.width}
+          height={bounds.height}
+        />
       );
       break;
     }
@@ -143,7 +179,12 @@ export function drawNode(node: EffectiveNode, resources: RenderResources): React
         <>
           {draw.fill !== undefined && <Path path={draw.d} color={draw.fill} />}
           {draw.stroke && (
-            <Path path={draw.d} color={draw.stroke.color} style="stroke" strokeWidth={draw.stroke.width} />
+            <Path
+              path={draw.d}
+              color={draw.stroke.color}
+              style="stroke"
+              strokeWidth={draw.stroke.width}
+            />
           )}
         </>
       );
@@ -163,7 +204,11 @@ export function drawNode(node: EffectiveNode, resources: RenderResources): React
 
   if (node.opacity < 1 || !isIdentity(node.matrix)) {
     return (
-      <Group key={node.id} matrix={toSkMatrix(node.matrix)} opacity={node.opacity}>
+      <Group
+        key={node.id}
+        matrix={toSkMatrix(node.matrix)}
+        opacity={node.opacity}
+      >
         {content}
       </Group>
     );

@@ -6,7 +6,7 @@ import {
   type GraphicError,
   type LpkgContainer,
   type PackageManifest,
-} from '@wuguishifu/core';
+} from '@graphics-i18n/core';
 
 export type SvgResources = {
   /** assetId -> data URI usable as an <image> href */
@@ -54,7 +54,10 @@ export function buildSvgResources(
     }
     try {
       const bytes = container.readChunk(entry.path);
-      const mime = entry.mimeType ?? MIME_BY_TYPE[entry.type] ?? 'application/octet-stream';
+      const mime =
+        entry.mimeType ??
+        MIME_BY_TYPE[entry.type] ??
+        'application/octet-stream';
       hrefs.set(assetId, `data:${mime};base64,${bytesToBase64(bytes)}`);
     } catch (cause) {
       diagnostics.push({

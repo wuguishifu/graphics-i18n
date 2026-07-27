@@ -1,5 +1,5 @@
 import { matchFont, Skia, type SkFont } from '@shopify/react-native-skia';
-import { type TextMeasurer, type TextStyle } from '@wuguishifu/core';
+import { type TextMeasurer, type TextStyle } from '@graphics-i18n/core';
 import { selectTypeface, type LoadedFonts } from './loadFont.js';
 
 function fontKey(style: TextStyle, fontSize: number): string {
@@ -8,7 +8,18 @@ function fontKey(style: TextStyle, fontSize: number): string {
 
 function toRnWeight(
   weight: TextStyle['fontWeight'],
-): 'normal' | 'bold' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900' {
+):
+  | 'normal'
+  | 'bold'
+  | '100'
+  | '200'
+  | '300'
+  | '400'
+  | '500'
+  | '600'
+  | '700'
+  | '800'
+  | '900' {
   if (weight === undefined || weight === 'normal' || weight === 'bold') {
     return weight ?? 'normal';
   }
@@ -30,7 +41,12 @@ export class SkiaTextMeasurer implements TextMeasurer {
     const key = fontKey(style, fontSize);
     const existing = this.fontInstances.get(key);
     if (existing) return existing;
-    const typeface = selectTypeface(this.loaded, style.fontFamily, style.fontWeight, style.fontStyle);
+    const typeface = selectTypeface(
+      this.loaded,
+      style.fontFamily,
+      style.fontWeight,
+      style.fontStyle,
+    );
     let font: SkFont;
     if (typeface) {
       font = Skia.Font(typeface, fontSize);

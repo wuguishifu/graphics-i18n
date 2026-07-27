@@ -1,7 +1,7 @@
 'use client';
 
-import type { EffectiveScene } from '@wuguishifu/core';
-import { SvgGraphic, type SvgResources } from '@wuguishifu/react-graphics-i18n';
+import type { EffectiveScene } from '@graphics-i18n/core';
+import { SvgGraphic, type SvgResources } from '@graphics-i18n/react';
 import type { EditorAction } from '@/lib/editor/reducer';
 
 function matrixString(m: readonly number[]): string {
@@ -32,7 +32,12 @@ export function PreviewCanvas({
       className="relative w-full max-w-4xl overflow-hidden rounded-xl border bg-[repeating-conic-gradient(#00000010_0%_25%,transparent_0%_50%)] bg-[length:16px_16px] shadow-sm"
       onClick={() => dispatch({ type: 'select-node', id: undefined })}
     >
-      <SvgGraphic scene={scene} resources={resources} debug={debug} style={{ width: '100%', height: 'auto', display: 'block' }} />
+      <SvgGraphic
+        scene={scene}
+        resources={resources}
+        debug={debug}
+        style={{ width: '100%', height: 'auto', display: 'block' }}
+      />
       <svg
         viewBox={`0 0 ${width} ${height}`}
         className="absolute inset-0 h-full w-full"
@@ -46,7 +51,11 @@ export function PreviewCanvas({
               width={node.bounds.width}
               height={node.bounds.height}
               fill="transparent"
-              stroke={node.id === selectedId ? 'oklch(0.62 0.19 259.8)' : 'transparent'}
+              stroke={
+                node.id === selectedId
+                  ? 'oklch(0.62 0.19 259.8)'
+                  : 'transparent'
+              }
               strokeWidth={2}
               vectorEffect="non-scaling-stroke"
               style={{ pointerEvents: 'all', cursor: 'pointer' }}

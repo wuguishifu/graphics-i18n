@@ -1,4 +1,9 @@
-import { LpkgError, fetchSourceReader, setDefaultSourceReader, type SourceReader } from '@wuguishifu/core';
+import {
+  LpkgError,
+  fetchSourceReader,
+  setDefaultSourceReader,
+  type SourceReader,
+} from '@graphics-i18n/core';
 import { Image } from 'react-native';
 
 /**

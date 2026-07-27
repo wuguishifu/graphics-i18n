@@ -1,5 +1,11 @@
 import { Skia, type SkTypeface } from '@shopify/react-native-skia';
-import { LruCache, type FontEntry, type GraphicError, type LpkgContainer, type PackageManifest } from '@wuguishifu/core';
+import {
+  LruCache,
+  type FontEntry,
+  type GraphicError,
+  type LpkgContainer,
+  type PackageManifest,
+} from '@graphics-i18n/core';
 
 export type LoadedFont = {
   fontId: string;
@@ -31,7 +37,9 @@ export function loadFonts(
   for (const [fontId, entry] of Object.entries(manifest.fonts ?? {})) {
     try {
       const bytes = container.readChunk(entry.path);
-      const typeface = Skia.Typeface.MakeFreeTypeFaceFromData(Skia.Data.fromBytes(bytes));
+      const typeface = Skia.Typeface.MakeFreeTypeFaceFromData(
+        Skia.Data.fromBytes(bytes),
+      );
       if (typeface) {
         fonts.push({ fontId, entry, typeface });
       } else {
@@ -67,15 +75,19 @@ export function selectTypeface(
   weight?: number | 'normal' | 'bold',
   style?: 'normal' | 'italic',
 ): SkTypeface | undefined {
-  const candidates = loaded.fonts.filter((font) => font.entry.family === family);
+  const candidates = loaded.fonts.filter(
+    (font) => font.entry.family === family,
+  );
   if (candidates.length === 0) return undefined;
   const wantedWeight = numericWeight(weight);
   const wantedStyle = style ?? 'normal';
   let best = candidates[0];
   let bestScore = Infinity;
   for (const candidate of candidates) {
-    const stylePenalty = (candidate.entry.style ?? 'normal') === wantedStyle ? 0 : 1000;
-    const score = stylePenalty + Math.abs((candidate.entry.weight ?? 400) - wantedWeight);
+    const stylePenalty =
+      (candidate.entry.style ?? 'normal') === wantedStyle ? 0 : 1000;
+    const score =
+      stylePenalty + Math.abs((candidate.entry.weight ?? 400) - wantedWeight);
     if (score < bestScore) {
       best = candidate;
       bestScore = score;

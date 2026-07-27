@@ -1,4 +1,4 @@
-import { LocalizedGraphic } from '@wuguishifu/react-native-graphics-i18n';
+import { LocalizedGraphic } from '@graphics-i18n/react-native';
 import { useState } from 'react';
 import {
   Pressable,

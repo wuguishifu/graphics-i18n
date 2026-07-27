@@ -4,7 +4,7 @@ import {
   type PackageManifest,
   type TextMeasurer,
   type TextStyle,
-} from '@wuguishifu/core';
+} from '@graphics-i18n/core';
 
 function cssWeight(weight: TextStyle['fontWeight']): string {
   if (weight === undefined) return '400';

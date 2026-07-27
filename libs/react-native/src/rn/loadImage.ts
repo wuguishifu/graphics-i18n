@@ -1,5 +1,10 @@
 import { Skia, type SkImage, type SkSVG } from '@shopify/react-native-skia';
-import { LruCache, type GraphicError, type LpkgContainer, type PackageManifest } from '@wuguishifu/core';
+import {
+  LruCache,
+  type GraphicError,
+  type LpkgContainer,
+  type PackageManifest,
+} from '@graphics-i18n/core';
 import { strFromU8 } from 'fflate';
 
 export type LoadedAssets = {
@@ -11,7 +16,11 @@ export type LoadedAssets = {
 const imageCache = new LruCache<string, SkImage>(64);
 const svgCache = new LruCache<string, SkSVG>(32);
 
-function assetCacheKey(packageKey: string, assetId: string, sha256?: string): string {
+function assetCacheKey(
+  packageKey: string,
+  assetId: string,
+  sha256?: string,
+): string {
   return `${packageKey}#${assetId}${sha256 ? `:${sha256}` : ''}`;
 }
 
@@ -45,7 +54,9 @@ export function loadAssets(
       if (entry.type === 'svg') {
         let svg = svgCache.get(key);
         if (!svg) {
-          const made = Skia.SVG.MakeFromString(strFromU8(container.readChunk(entry.path)));
+          const made = Skia.SVG.MakeFromString(
+            strFromU8(container.readChunk(entry.path)),
+          );
           if (!made) throw new Error('SVG decode failed');
           svgCache.set(key, made);
           svg = made;

@@ -1,12 +1,12 @@
 {
-  "name": "@wuguishifu/editor",
+  "name": "@graphics-i18n/editor",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
     "@base-ui/react": "*",
     "@tailwindcss/postcss": "*",
-    "@wuguishifu/core": "workspace:^",
-    "@wuguishifu/react-graphics-i18n": "workspace:^",
+    "@graphics-i18n/core": "workspace:^",
+    "@graphics-i18n/react": "workspace:^",
     "class-variance-authority": "*",
     "clsx": "*",
     "lucide-react": "*",

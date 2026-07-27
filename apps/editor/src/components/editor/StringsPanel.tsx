@@ -1,6 +1,6 @@
 'use client';
 
-import { walkNodes } from '@wuguishifu/core';
+import { walkNodes } from '@graphics-i18n/core';
 import { Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
@@ -12,7 +12,8 @@ function collectKeys(doc: EditorDoc): string[] {
   const keys = new Set<string>();
   walkNodes(doc.scene.root, (node) => {
     if (node.type === 'text') keys.add(node.bind);
-    if (node.type === 'badge' && node.text.startsWith('@')) keys.add(node.text.slice(1));
+    if (node.type === 'badge' && node.text.startsWith('@'))
+      keys.add(node.text.slice(1));
   });
   for (const pack of Object.values(doc.locales)) {
     for (const key of Object.keys(pack.strings)) keys.add(key);
@@ -36,14 +37,21 @@ export function StringsPanel({
   const fallbackPack = doc.locales[fallbackLocale];
 
   if (!pack) {
-    return <p className="px-3 py-4 text-sm text-muted-foreground">No locale pack for “{locale}”.</p>;
+    return (
+      <p className="px-3 py-4 text-sm text-muted-foreground">
+        No locale pack for “{locale}”.
+      </p>
+    );
   }
 
   return (
     <div className="flex flex-col gap-2 overflow-y-auto px-3 py-3">
       <p className="text-xs text-muted-foreground">
-        Strings for <span className="font-medium text-foreground">{locale}</span>
-        {locale !== fallbackLocale && <> — empty values fall back to {fallbackLocale}</>}
+        Strings for{' '}
+        <span className="font-medium text-foreground">{locale}</span>
+        {locale !== fallbackLocale && (
+          <> — empty values fall back to {fallbackLocale}</>
+        )}
       </p>
       {keys.map((key) => {
         const value = pack.strings[key];
@@ -51,7 +59,9 @@ export function StringsPanel({
         return (
           <div key={key} className="flex flex-col gap-1">
             <div className="flex items-center justify-between gap-2">
-              <span className="truncate font-mono text-xs text-muted-foreground">{key}</span>
+              <span className="truncate font-mono text-xs text-muted-foreground">
+                {key}
+              </span>
               <Button
                 variant="ghost"
                 size="icon-xs"
@@ -67,7 +77,12 @@ export function StringsPanel({
               dir={pack.direction === 'rtl' ? 'rtl' : undefined}
               className="h-8"
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                dispatch({ type: 'set-string', locale, key, value: event.target.value })
+                dispatch({
+                  type: 'set-string',
+                  locale,
+                  key,
+                  value: event.target.value,
+                })
               }
             />
           </div>
@@ -88,7 +103,9 @@ export function StringsPanel({
           value={newKey}
           placeholder="new.string.key"
           className="h-8 font-mono text-xs"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => setNewKey(event.target.value)}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setNewKey(event.target.value)
+          }
         />
         <Button type="submit" variant="outline" size="sm">
           Add

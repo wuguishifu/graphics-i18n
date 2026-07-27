@@ -16,7 +16,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    "customConditions": ["@wuguishifu/source"],
+    "customConditions": ["@graphics-i18n/source"],
     "noUncheckedSideEffectImports": false,
     "types": ["*"]
   }

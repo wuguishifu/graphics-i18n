@@ -1,5 +1,5 @@
 {
-  "name": "@wuguishifu/core",
+  "name": "@graphics-i18n/core",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -12,19 +12,19 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "@wuguishifu/source": "./src/index.ts",
+      "@graphics-i18n/source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
     "./tools": {
-      "@wuguishifu/source": "./src/tools/index.ts",
+      "@graphics-i18n/source": "./src/tools/index.ts",
       "types": "./dist/tools/index.d.ts",
       "import": "./dist/tools/index.js",
       "default": "./dist/tools/index.js"
     },
     "./testing": {
-      "@wuguishifu/source": "./src/testing/index.ts",
+      "@graphics-i18n/source": "./src/testing/index.ts",
       "types": "./dist/testing/index.d.ts",
       "import": "./dist/testing/index.js",
       "default": "./dist/testing/index.js"
