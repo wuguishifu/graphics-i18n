@@ -2,6 +2,13 @@
   "extends": "./tsconfig.base.json",
   "compileOnSave": false,
   "files": [],
-  "references": [],
+  "references": [
+    {
+      "path": "./libs/react-native-graphics-i18n"
+    },
+    {
+      "path": "./apps/example-react-native"
+    }
+  ],
   "compilerOptions": {}
 }

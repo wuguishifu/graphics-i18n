@@ -1,0 +1,10 @@
+{
+  "locale": "en",
+  "direction": "ltr",
+  "strings": {
+    "promo.title": "Summer Sale",
+    "promo.subtitle": "Up to 50% off everything, this week only.",
+    "promo.discount": "SAVE 50%",
+    "promo.terms": "Offer valid through August 31. Exclusions apply."
+  }
+}

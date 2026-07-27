@@ -1,0 +1,12 @@
+{
+  "locale": "ar",
+  "direction": "rtl",
+  "strings": {
+    "promo.title": "تخفيضات الصيف",
+    "promo.subtitle": "خصم يصل إلى ٥٠٪ على كل شيء، هذا الأسبوع فقط.",
+    "promo.discount": "وفّر ٥٠٪"
+  },
+  "fontOverrides": {
+    "Inter": "noto-arabic"
+  }
+}

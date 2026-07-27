@@ -1,0 +1,18 @@
+{
+  "locale": "fr",
+  "direction": "ltr",
+  "strings": {
+    "promo.title": "Les soldes d’été sont arrivées",
+    "promo.subtitle": "Jusqu’à 50 % de réduction sur tout, cette semaine seulement.",
+    "promo.discount": "-50 %"
+  },
+  "nodeOverrides": {
+    "title": {
+      "box": { "width": 560 },
+      "fit": { "minFontSize": 34 }
+    }
+  },
+  "assetOverrides": {
+    "logo": "logo-alt"
+  }
+}

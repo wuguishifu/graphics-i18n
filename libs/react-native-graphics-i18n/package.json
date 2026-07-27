@@ -1,0 +1,42 @@
+{
+  "name": "@root/react-native-graphics-i18n",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "lpkg": "./dist/tools/cli.js"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "@org/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./core": {
+      "@org/source": "./src/core.ts",
+      "types": "./dist/core.d.ts",
+      "import": "./dist/core.js",
+      "default": "./dist/core.js"
+    },
+    "./tools": {
+      "@org/source": "./src/tools/index.ts",
+      "types": "./dist/tools/index.d.ts",
+      "import": "./dist/tools/index.js",
+      "default": "./dist/tools/index.js"
+    }
+  },
+  "dependencies": {
+    "fflate": "*",
+    "tslib": "*"
+  },
+  "peerDependencies": {
+    "@shopify/react-native-skia": ">=1.0.0",
+    "react": ">=18",
+    "react-native": ">=0.73"
+  }
+}

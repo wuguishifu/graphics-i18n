@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0.0",
+  "packageId": "summer-promo-banner",
+  "packageVersion": 1,
+  "name": "Summer Promo Banner",
+  "description": "Example localized graphic for @root/react-native-graphics-i18n",
+  "canvas": {
+    "width": 1200,
+    "height": 630,
+    "background": "#1e1b4b"
+  },
+  "render": {
+    "engine": "skia",
+    "defaultLocale": "en",
+    "fallbackLocale": "en",
+    "textDirection": "ltr"
+  },
+  "chunks": {
+    "scene": "scene.json",
+    "locales": {
+      "en": "locales/en.json",
+      "fr": "locales/fr.json",
+      "ar": "locales/ar.json"
+    },
+    "patches": {
+      "fr": "patches/fr.json",
+      "ar": "patches/ar.json"
+    },
+    "assets": {
+      "bg": "assets/bg.png",
+      "logo": "assets/logo.svg",
+      "logo-alt": "assets/logo-alt.svg"
+    },
+    "fonts": {
+      "inter-regular": "fonts/Inter-Regular.ttf",
+      "inter-bold": "fonts/Inter-Bold.ttf",
+      "noto-arabic": "fonts/NotoSansArabic.ttf"
+    }
+  },
+  "locales": [
+    { "locale": "en", "label": "English", "strings": true },
+    { "locale": "fr", "label": "Français", "strings": true, "patch": true },
+    { "locale": "ar", "label": "العربية", "direction": "rtl", "strings": true, "patch": true }
+  ],
+  "assets": {
+    "bg": { "path": "assets/bg.png", "type": "image", "mimeType": "image/png", "width": 600, "height": 315 },
+    "logo": { "path": "assets/logo.svg", "type": "svg" },
+    "logo-alt": { "path": "assets/logo-alt.svg", "type": "svg" }
+  },
+  "fonts": {
+    "inter-regular": { "path": "fonts/Inter-Regular.ttf", "family": "Inter", "weight": 400 },
+    "inter-bold": { "path": "fonts/Inter-Bold.ttf", "family": "Inter", "weight": 700 },
+    "noto-arabic": { "path": "fonts/NotoSansArabic.ttf", "family": "Noto Sans Arabic", "weight": 400 }
+  },
+  "authoringTool": { "name": "hand-authored", "version": "1.0.0" }
+}

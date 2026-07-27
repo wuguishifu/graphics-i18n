@@ -1,0 +1,10 @@
+{
+  "nodes": {
+    "logo": {
+      "transform": { "x": -928 }
+    },
+    "accent": {
+      "transform": { "x": 460 }
+    }
+  }
+}

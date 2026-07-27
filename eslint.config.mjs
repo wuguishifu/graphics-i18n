@@ -18,12 +18,6 @@ export default [
       'no-console': 'warn',
       '@typescript-eslint/no-unused-vars': 'off', // Covered by tsconfig 'noUnusedLocals' flag
       '@typescript-eslint/no-require-imports': 'off', // This is a modern code base, if you're using `require` you likely have no choice
-      '@typescript-eslint/consistent-type-assertions': [
-        'error',
-        {
-          assertionStyle: 'never',
-        },
-      ],
       'import/order': [
         'warn',
         {

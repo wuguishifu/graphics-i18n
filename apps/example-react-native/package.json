@@ -1,0 +1,31 @@
+{
+  "name": "@org/example-react-native",
+  "version": "0.0.1",
+  "private": true,
+  "main": "expo-router/entry",
+  "scripts": {
+    "eas-build-post-install": "cd ../../ && node tools/scripts/eas-build-post-install.mjs . apps/example-react-native"
+  },
+  "dependencies": {
+    "@expo/metro": "*",
+    "@expo/vector-icons": "*",
+    "@root/react-native-graphics-i18n": "workspace:*",
+    "@shopify/react-native-skia": "*",
+    "@testing-library/react-native": "*",
+    "expo": "*",
+    "expo-constants": "*",
+    "expo-linking": "*",
+    "expo-router": "*",
+    "expo-splash-screen": "*",
+    "expo-status-bar": "*",
+    "expo-system-ui": "*",
+    "jest-expo": "*",
+    "react": "*",
+    "react-native": "*",
+    "react-native-safe-area-context": "*",
+    "react-native-screens": "*",
+    "react-native-svg": "*",
+    "react-native-svg-transformer": "*",
+    "react-native-web": "*"
+  }
+}

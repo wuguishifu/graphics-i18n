@@ -1,0 +1,32 @@
+{
+  "name": "example-react-native",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/example-react-native/src",
+  "projectType": "application",
+  "tags": ["scope:client"],
+  "// targets": "to see all targets run: nx show project example-react-native --web",
+  "targets": {
+    "build-graphics": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["^build"],
+      "options": {
+        "cwd": "apps/example-react-native",
+        "command": "node ../../libs/react-native-graphics-i18n/dist/tools/cli.js pack assets/graphics/summer-promo -o assets/graphics/summer-promo.lpkg"
+      }
+    },
+    "pod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/example-react-native/ios",
+        "command": "pod install"
+      }
+    },
+    "xcode": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/example-react-native/ios",
+        "command": "open -a Xcode Graphicsi18nExample.xcworkspace"
+      }
+    }
+  }
+}

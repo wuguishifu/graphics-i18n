@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "files": [],
+  "include": [".expo/types/**/*.ts", "expo-env.d.ts"],
+  "references": [
+    {
+      "path": "../../libs/react-native-graphics-i18n"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    }
+  ]
+}

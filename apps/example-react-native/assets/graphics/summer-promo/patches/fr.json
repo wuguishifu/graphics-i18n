@@ -1,0 +1,10 @@
+{
+  "nodes": {
+    "title": {
+      "style": { "color": "#ffe8d6" }
+    },
+    "discount-badge": {
+      "box": { "width": 190 }
+    }
+  }
+}

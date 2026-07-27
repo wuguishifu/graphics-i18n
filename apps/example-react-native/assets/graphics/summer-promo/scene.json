@@ -1,0 +1,123 @@
+{
+  "sceneVersion": "1.0.0",
+  "root": [
+    {
+      "id": "background",
+      "type": "image",
+      "assetId": "bg",
+      "x": 0,
+      "y": 0,
+      "width": 1200,
+      "height": 630,
+      "fit": "cover"
+    },
+    {
+      "id": "wave",
+      "type": "path",
+      "d": "M0 580 Q150 540 300 580 T600 580 T900 580 T1200 580 L1200 630 L0 630 Z",
+      "fill": "rgba(255,255,255,0.16)"
+    },
+    {
+      "id": "panel",
+      "type": "rect",
+      "x": 48,
+      "y": 48,
+      "width": 620,
+      "height": 534,
+      "radius": 24,
+      "fill": "rgba(17,17,17,0.35)",
+      "stroke": { "color": "rgba(255,255,255,0.25)", "width": 2 }
+    },
+    {
+      "id": "accent",
+      "type": "rect",
+      "x": 96,
+      "y": 96,
+      "width": 64,
+      "height": 10,
+      "radius": 5,
+      "fill": "#ffd166"
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "bind": "promo.title",
+      "fallbackText": "Summer Sale",
+      "box": { "x": 96, "y": 130, "width": 524, "height": 160 },
+      "style": {
+        "fontFamily": "Inter",
+        "fontSize": 72,
+        "fontWeight": 700,
+        "lineHeight": 1.08,
+        "color": "#ffffff",
+        "align": "left",
+        "valign": "top"
+      },
+      "fit": { "mode": "shrink", "minFontSize": 40, "overflow": "ellipsis" }
+    },
+    {
+      "id": "subtitle",
+      "type": "text",
+      "bind": "promo.subtitle",
+      "box": { "x": 96, "y": 306, "width": 524, "height": 130 },
+      "style": {
+        "fontFamily": "Inter",
+        "fontSize": 32,
+        "lineHeight": 1.3,
+        "color": "rgba(255,255,255,0.92)",
+        "align": "left",
+        "valign": "top"
+      },
+      "wrap": { "mode": "word", "maxLines": 3 },
+      "fit": { "mode": "ellipsis" }
+    },
+    {
+      "id": "discount-badge",
+      "type": "badge",
+      "text": "@promo.discount",
+      "box": { "x": 96, "y": 452, "width": 230, "height": 68 },
+      "style": {
+        "fontFamily": "Inter",
+        "fontSize": 30,
+        "fontWeight": 700,
+        "color": "#ffffff",
+        "align": "center",
+        "valign": "middle"
+      },
+      "background": { "fill": "#e11d48", "radius": 18 }
+    },
+    {
+      "id": "divider",
+      "type": "line",
+      "x1": 96,
+      "y1": 548,
+      "x2": 620,
+      "y2": 548,
+      "stroke": { "color": "rgba(255,255,255,0.4)", "width": 2 }
+    },
+    {
+      "id": "terms",
+      "type": "text",
+      "bind": "promo.terms",
+      "box": { "x": 96, "y": 556, "width": 524, "height": 30 },
+      "style": {
+        "fontFamily": "Inter",
+        "fontSize": 18,
+        "color": "rgba(255,255,255,0.7)",
+        "align": "left",
+        "valign": "top"
+      },
+      "wrap": { "mode": "word", "maxLines": 1 },
+      "fit": { "mode": "ellipsis" }
+    },
+    {
+      "id": "logo",
+      "type": "svg",
+      "assetId": "logo",
+      "x": 1000,
+      "y": 72,
+      "width": 128,
+      "height": 128
+    }
+  ]
+}

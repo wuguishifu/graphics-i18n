@@ -21,3 +21,5 @@
 - The `nx-generate` skill handles generator discovery internally - don't call nx_docs just to look up generator syntax
 
 <!-- nx configuration end-->
+
+- Once you're done making changes, make sure to run `nx run-many -t typecheck,lint` to check for any correctable issues.
