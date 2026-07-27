@@ -1,6 +1,6 @@
 {
   "name": "@graphics-i18n/react-native",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -10,7 +10,10 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": ["dist", "!dist/**/*.tsbuildinfo"],
+  "files": [
+    "dist",
+    "!dist/**/*.tsbuildinfo"
+  ],
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
