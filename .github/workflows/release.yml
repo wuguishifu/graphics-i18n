@@ -1,0 +1,76 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version-bump-type:
+        description: Version bump type
+        required: false
+        type: choice
+        default: patch
+        options:
+          - major
+          - minor
+          - patch
+      first-release:
+        description: First release (no previous git tag or published package)
+        required: false
+        type: boolean
+        default: false
+      dry-run:
+        description: Preview changes without publishing
+        required: false
+        type: boolean
+        default: false
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+# id-token: write enables npm trusted publishing (OIDC) — no npm token needed.
+# Each package must have this repo + workflow filename configured as a trusted
+# publisher on npmjs.com (package Settings -> Trusted Publisher).
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: pnpm
+
+      - name: update npm (trusted publishing needs npm >= 11.5.1)
+        run: npm install -g npm@latest
+
+      - name: install deps
+        run: pnpm i --frozen-lockfile
+
+      - name: verify
+        run: pnpm nx run-many -t typecheck,lint,test
+
+      - name: configure git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: version, changelog, and publish
+        run: >
+          pnpm nx release ${{ inputs.version-bump-type }} --yes
+          ${{ inputs.first-release == true && '--first-release' || '' }}
+          ${{ inputs.dry-run == true && '--dry-run' || '' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_CONFIG_PROVENANCE: 'true'

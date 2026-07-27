@@ -82,5 +82,26 @@
         "linter": "eslint"
       }
     }
+  },
+  "release": {
+    "projects": ["core", "react", "react-native"],
+    "projectsRelationship": "fixed",
+    "releaseTag": {
+      "pattern": "v{version}"
+    },
+    "git": {
+      "commit": true,
+      "commitMessage": "chore(release): v{version}",
+      "tag": true,
+      "push": true
+    },
+    "version": {
+      "preVersionCommand": "pnpm nx run-many -t build -p core react react-native"
+    },
+    "changelog": {
+      "workspaceChangelog": {
+        "createRelease": "github"
+      }
+    }
   }
 }

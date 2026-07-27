@@ -1,7 +1,16 @@
 {
   "name": "@graphics-i18n/react",
   "version": "0.0.1",
-  "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wuguishifu/graphics-i18n.git",
+    "directory": "libs/react"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": ["dist", "!dist/**/*.tsbuildinfo"],
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

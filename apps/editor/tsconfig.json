@@ -50,6 +50,9 @@
   ],
   "references": [
     {
+      "path": "../../libs/react"
+    },
+    {
       "path": "../../libs/core"
     }
   ]

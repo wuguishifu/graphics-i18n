@@ -2,9 +2,9 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig(() => ({
   root: __dirname,
-  cacheDir: '../../node_modules/.vite/libs/react-graphics-i18n',
+  cacheDir: '../../node_modules/.vite/libs/react',
   test: {
-    name: 'react-graphics-i18n',
+    name: 'react',
     watch: false,
     globals: true,
     environment: 'node',

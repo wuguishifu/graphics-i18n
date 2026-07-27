@@ -35,5 +35,9 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
   ],
-  "references": []
+  "references": [
+    {
+      "path": "../../libs/react-native/tsconfig.lib.json"
+    }
+  ]
 }
