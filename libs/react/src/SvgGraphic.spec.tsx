@@ -66,9 +66,15 @@ describe('SvgGraphic', () => {
   });
 
   it('mirrors alignment for RTL locales', async () => {
-    const { markup } = await renderLocale('ar');
-    expect(markup).toContain('text-anchor="end"');
+    const { result, markup } = await renderLocale('ar');
     expect(markup).toContain('direction:rtl');
+    // Right-aligned RTL text anchors at the box's right edge, and because the
+    // anchor is direction-relative that means text-anchor="start".
+    const title = result.effectiveScene.nodes.find((n) => n.id === 'title');
+    expect(title?.draw.kind).toBe('text');
+    const right = title!.bounds.x + title!.bounds.width;
+    expect(markup).toContain(`x="${right}" `);
+    expect(markup).toContain('text-anchor="start"');
   });
 
   it('draws debug bounds when enabled', async () => {

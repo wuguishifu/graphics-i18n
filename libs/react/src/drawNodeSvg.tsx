@@ -38,8 +38,21 @@ const ASCENT_RATIO = 0.8;
 function textLines(layout: ResolvedTextLayout, bounds: Box): ReactNode[] {
   const { style, lines, fontSize, lineHeight, direction } = layout;
   const align = style.align ?? 'left';
+  // `text-anchor` resolves against the inline base direction, so start/end swap
+  // sides once the text element is `direction: rtl`. `align` is already the
+  // physical side (resolveAlign mirrored it), so flip the anchor back for RTL
+  // to keep the anchored edge on the side the alignment names.
+  const rtl = direction === 'rtl';
   const anchor =
-    align === 'center' ? 'middle' : align === 'right' ? 'end' : 'start';
+    align === 'center'
+      ? 'middle'
+      : align === 'right'
+        ? rtl
+          ? 'start'
+          : 'end'
+        : rtl
+          ? 'end'
+          : 'start';
   const x =
     align === 'center'
       ? bounds.x + bounds.width / 2

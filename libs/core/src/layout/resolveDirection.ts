@@ -26,9 +26,11 @@ export function resolveAlign(
   direction: 'ltr' | 'rtl',
   rtlAware: boolean,
 ): 'left' | 'center' | 'right' {
-  const base = align ?? (direction === 'rtl' && rtlAware ? 'right' : 'left');
-  if (!rtlAware || direction === 'ltr') return base;
-  if (base === 'left') return 'right';
-  if (base === 'right') return 'left';
-  return base;
+  if (!rtlAware || direction === 'ltr') return align ?? 'left';
+  // An omitted align means "leading edge", which is already the right side in
+  // RTL — mirroring only applies to an explicitly authored side.
+  if (align === undefined) return 'right';
+  if (align === 'left') return 'right';
+  if (align === 'right') return 'left';
+  return align;
 }

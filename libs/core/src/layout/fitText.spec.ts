@@ -120,6 +120,13 @@ describe('fitText', () => {
     expect(optOut.layout.style.align).toBe('left');
   });
 
+  it('defaults RTL text to the leading (right) edge', () => {
+    const result = fitText({ ...base, text: 'مرحبا', direction: 'rtl', style });
+    expect(result.layout.style.align).toBe('right');
+    const ltr = fitText({ ...base, text: 'hello', direction: 'ltr', style });
+    expect(ltr.layout.style.align).toBe('left');
+  });
+
   it('is deterministic', () => {
     const input = {
       ...base,
