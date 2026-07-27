@@ -1,4 +1,3 @@
-import { Skia, type SkTypeface } from '@shopify/react-native-skia';
 import {
   LruCache,
   type FontEntry,
@@ -6,6 +5,7 @@ import {
   type LpkgContainer,
   type PackageManifest,
 } from '@graphics-i18n/core';
+import { Skia, type SkTypeface } from '@shopify/react-native-skia';
 
 export type LoadedFont = {
   fontId: string;

@@ -1,10 +1,10 @@
-import { Skia, type SkImage, type SkSVG } from '@shopify/react-native-skia';
 import {
   LruCache,
   type GraphicError,
   type LpkgContainer,
   type PackageManifest,
 } from '@graphics-i18n/core';
+import { Skia, type SkImage, type SkSVG } from '@shopify/react-native-skia';
 import { strFromU8 } from 'fflate';
 
 export type LoadedAssets = {
