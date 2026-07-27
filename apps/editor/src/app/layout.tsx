@@ -1,8 +1,9 @@
+import { TooltipProvider } from '@/components/ui/tooltip';
 import './global.css';
 
 export const metadata = {
-  title: 'Graphics i18n',
-  description: 'Editor',
+  title: 'i18n graphics',
+  description: 'Localized graphics packages for web and React Native',
 };
 
 export default function RootLayout({
@@ -12,7 +13,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <TooltipProvider>{children}</TooltipProvider>
+      </body>
     </html>
   );
 }
