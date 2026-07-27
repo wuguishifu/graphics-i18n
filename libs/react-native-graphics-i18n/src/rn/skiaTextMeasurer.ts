@@ -1,6 +1,5 @@
 import { matchFont, Skia, type SkFont } from '@shopify/react-native-skia';
-import type { TextMeasurer } from '../layout/textMeasurer.js';
-import type { TextStyle } from '../types/scene.js';
+import { type TextMeasurer, type TextStyle } from '@wuguishifu/core';
 import { selectTypeface, type LoadedFonts } from './loadFont.js';
 
 function fontKey(style: TextStyle, fontSize: number): string {

@@ -11,7 +11,7 @@
       "dependsOn": ["^build"],
       "options": {
         "cwd": "apps/example-react-native",
-        "command": "node ../../libs/react-native-graphics-i18n/dist/tools/cli.js pack assets/graphics/summer-promo -o assets/graphics/summer-promo.lpkg"
+        "command": "node ../../libs/core/dist/tools/cli.js pack assets/graphics/summer-promo -o assets/graphics/summer-promo.lpkg"
       }
     },
     "pod": {

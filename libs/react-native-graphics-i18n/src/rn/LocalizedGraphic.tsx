@@ -1,6 +1,6 @@
+import type { GraphicSource } from '@wuguishifu/core';
 import { memo } from 'react';
 import { View, type StyleProp, type ViewStyle } from 'react-native';
-import type { GraphicSource } from '../package/sourceReader.js';
 import { DebugOverlay } from './DebugOverlay.js';
 import { GraphicCanvas } from './renderSkia.js';
 import { useLocalizedGraphic } from './useLocalizedGraphic.js';

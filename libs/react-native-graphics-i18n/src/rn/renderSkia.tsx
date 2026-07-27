@@ -1,5 +1,5 @@
 import { Canvas, Fill, Group } from '@shopify/react-native-skia';
-import type { EffectiveScene } from '../types/effective.js';
+import type { EffectiveScene } from '@wuguishifu/core';
 import { drawDebugBounds, drawNode, type RenderResources } from './drawNode.js';
 
 export type GraphicCanvasProps = {

@@ -1,12 +1,5 @@
+import { collectVisibleAssetIds, loadLocalizedGraphic, packageIdentity, sourceKey, type EffectiveScene, type GraphicError, type GraphicSource, type PackageManifest } from '@wuguishifu/core';
 import { useEffect, useRef, useState } from 'react';
-import { loadLocalizedGraphic } from '../api/loadLocalizedGraphic.js';
-import { collectVisibleAssetIds } from '../effective/buildEffectiveScene.js';
-import { packageIdentity } from '../package/openPackage.js';
-import type { GraphicSource } from '../package/sourceReader.js';
-import { sourceKey } from '../package/sourceReader.js';
-import type { EffectiveScene } from '../types/effective.js';
-import type { GraphicError } from '../types/errors.js';
-import type { PackageManifest } from '../types/manifest.js';
 import type { RenderResources } from './drawNode.js';
 import { loadFonts } from './loadFont.js';
 import { loadAssets } from './loadImage.js';

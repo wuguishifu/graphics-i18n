@@ -1,5 +1,5 @@
 {
-  "name": "@org/example-react-native",
+  "name": "@wuguishifu/example-react-native",
   "version": "0.0.1",
   "private": true,
   "main": "expo-router/entry",
@@ -9,7 +9,7 @@
   "dependencies": {
     "@expo/metro": "*",
     "@expo/vector-icons": "*",
-    "@root/react-native-graphics-i18n": "workspace:*",
+    "@wuguishifu/react-native-graphics-i18n": "workspace:*",
     "@shopify/react-native-skia": "*",
     "@testing-library/react-native": "*",
     "expo": "*",

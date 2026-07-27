@@ -1,10 +1,5 @@
+import { LpkgError, fetchSourceReader, setDefaultSourceReader, type SourceReader } from '@wuguishifu/core';
 import { Image } from 'react-native';
-import {
-  fetchSourceReader,
-  setDefaultSourceReader,
-  type SourceReader,
-} from '../package/sourceReader.js';
-import { LpkgError } from '../types/errors.js';
 
 /**
  * React Native source reader: numeric `require('./banner.lpkg')` references

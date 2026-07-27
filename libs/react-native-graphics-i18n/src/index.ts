@@ -1,6 +1,6 @@
-export * from './core.js';
+export * from '@wuguishifu/core';
 
-// React Native surface (requires react, react-native, @shopify/react-native-skia)
+// React Native renderer (requires react, react-native, @shopify/react-native-skia)
 export { LocalizedGraphic, type LocalizedGraphicProps } from './rn/LocalizedGraphic.js';
 export {
   useLocalizedGraphic,

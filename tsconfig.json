@@ -8,6 +8,15 @@
     },
     {
       "path": "./apps/example-react-native"
+    },
+    {
+      "path": "./apps/editor"
+    },
+    {
+      "path": "./libs/react-graphics-i18n"
+    },
+    {
+      "path": "./libs/core"
     }
   ],
   "compilerOptions": {}

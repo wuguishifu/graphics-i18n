@@ -1,10 +1,15 @@
-import { strToU8, zipSync } from 'fflate';
+import { strToU8 } from 'fflate';
 import { createHash } from 'node:crypto';
 import { promises as fs } from 'node:fs';
 import * as path from 'node:path';
 import { bytesToBase64 } from '../package/container.js';
+import {
+  contentToBytes as toBytes,
+  packLpkgFromFiles as packFiles,
+  type LpkgFileContent,
+} from '../package/packContainer.js';
 
-export type LpkgFileContent = Uint8Array | string | object;
+export type { LpkgFileContent };
 
 export type PackOptions = {
   /**
@@ -14,43 +19,18 @@ export type PackOptions = {
   computeHashes?: boolean;
 };
 
-function toBytes(content: LpkgFileContent): Uint8Array {
-  if (content instanceof Uint8Array) return content;
-  if (typeof content === 'string') return strToU8(content);
-  return strToU8(JSON.stringify(content));
-}
+const sha256 = (bytes: Uint8Array): string => createHash('sha256').update(bytes).digest('hex');
 
 /**
- * Build an .lpkg (zip) from an in-memory map of chunk path -> content.
- * Object values are serialized as JSON; strings as UTF-8 text.
+ * Build an .lpkg (zip) from an in-memory map of chunk path -> content, with
+ * sha256 chunk hashes. Node wrapper over the platform-neutral packer in
+ * `@wuguishifu/core` (`packLpkgFromFiles` there takes an injectable hasher).
  */
 export function packLpkgFromFiles(
   files: Record<string, LpkgFileContent>,
   options: PackOptions = {},
 ): Uint8Array {
-  const entries: Record<string, Uint8Array> = {};
-  for (const [filePath, content] of Object.entries(files)) {
-    entries[filePath] = toBytes(content);
-  }
-
-  if (options.computeHashes !== false && entries['manifest.json']) {
-    try {
-      const manifest = JSON.parse(new TextDecoder().decode(entries['manifest.json'])) as {
-        integrity?: { chunkHashes?: Record<string, string> };
-      };
-      const chunkHashes: Record<string, string> = {};
-      for (const [filePath, bytes] of Object.entries(entries)) {
-        if (filePath === 'manifest.json') continue;
-        chunkHashes[filePath] = createHash('sha256').update(bytes).digest('hex');
-      }
-      manifest.integrity = { ...manifest.integrity, chunkHashes };
-      entries['manifest.json'] = strToU8(JSON.stringify(manifest));
-    } catch {
-      // Leave the manifest untouched if it isn't JSON; validation will flag it.
-    }
-  }
-
-  return zipSync(entries);
+  return packFiles(files, { hash: options.computeHashes !== false ? sha256 : undefined });
 }
 
 /** Recursively read a directory into a chunk-path -> bytes map. */

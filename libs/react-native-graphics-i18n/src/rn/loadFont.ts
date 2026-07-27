@@ -1,8 +1,5 @@
 import { Skia, type SkTypeface } from '@shopify/react-native-skia';
-import { LruCache } from '../cache/lru.js';
-import type { LpkgContainer } from '../package/container.js';
-import type { GraphicError } from '../types/errors.js';
-import type { PackageManifest, FontEntry } from '../types/manifest.js';
+import { LruCache, type FontEntry, type GraphicError, type LpkgContainer, type PackageManifest } from '@wuguishifu/core';
 
 export type LoadedFont = {
   fontId: string;

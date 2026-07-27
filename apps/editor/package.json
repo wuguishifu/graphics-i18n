@@ -1,0 +1,21 @@
+{
+  "name": "@wuguishifu/editor",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@base-ui/react": "*",
+    "@tailwindcss/postcss": "*",
+    "@wuguishifu/core": "workspace:^",
+    "@wuguishifu/react-graphics-i18n": "workspace:^",
+    "class-variance-authority": "*",
+    "clsx": "*",
+    "lucide-react": "*",
+    "next": "*",
+    "react": "*",
+    "react-dom": "*",
+    "shadcn": "*",
+    "tailwind-merge": "*",
+    "tailwindcss": "*",
+    "tw-animate-css": "*"
+  }
+}
